@@ -1,20 +1,22 @@
 // ignore_for_file: avoid_print, use_build_context_synchronously, no_leading_underscores_for_local_identifiers, body_might_complete_normally_nullable
-
 import 'dart:io';
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:student_app/bloc/student_bloc.dart';
 import 'package:student_app/models/student.dart';
 import 'package:student_app/views/home/home_view.dart';
 
 class StudentCreateUpdateView extends StatefulWidget {
   final int mode;
   final Student? student;
+  final int? index;
   const StudentCreateUpdateView({
     super.key,
     required this.mode,
     this.student,
+    this.index,
   });
 
   @override
@@ -70,18 +72,24 @@ class _StudentCreateUpdateViewState extends State<StudentCreateUpdateView> {
             onPressed: () async {
               if (formKey.currentState!.validate()) {
                 print("Validated");
-                var box = await Hive.openBox<Student>('students'); //box opening
-                box.put(
-                  emailController.text,
-                  Student(
-                    name: nameController.text,
-                    age: int.parse(ageController.text),
-                    phone: int.parse(phoneController.text),
-                    email: emailController.text,
-                    imagePath: imagePath,
-                  ),
-                );
-                print(box.values);
+                widget.mode == 1
+                    ? BlocProvider.of<StudentBloc>(context).add(AddData(
+                        Studentsdata: Student(
+                            name: nameController.text,
+                            age: int.parse(ageController.text),
+                            phone: int.parse(phoneController.text),
+                            email: emailController.text,
+                            imagePath: imagePath)))
+                    : BlocProvider.of<StudentBloc>(context).add(EditData(
+                        studentModel: Student(
+                          name: nameController.text,
+                          age: int.parse(ageController.text),
+                          phone: int.parse(phoneController.text),
+                          email: emailController.text,
+                          imagePath: imagePath,
+                        ),
+                        index: widget.index!));
+
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                     builder: (context) =>

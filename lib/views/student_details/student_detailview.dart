@@ -5,9 +5,11 @@ import 'package:student_app/views/add_update/student_create_update.dart';
 
 class StudentDetailView extends StatelessWidget {
   final Student student;
+  final int index;
   const StudentDetailView({
     super.key,
     required this.student,
+    required this.index,
   });
 
   @override
@@ -33,6 +35,7 @@ class StudentDetailView extends StatelessWidget {
                   builder: (ctx) => StudentCreateUpdateView(
                     mode: 2,
                     student: student,
+                    index: index,
                   ),
                 ),
               );
@@ -81,7 +84,8 @@ class StudentDetailView extends StatelessWidget {
                         ),
                         TextSpan(
                           text: student.name,
-                          style: const TextStyle(color: Colors.black87, fontSize: 18),
+                          style: const TextStyle(
+                              color: Colors.black87, fontSize: 18),
                         ),
                       ],
                     ),
@@ -99,7 +103,8 @@ class StudentDetailView extends StatelessWidget {
                         ),
                         TextSpan(
                           text: student.age.toString(),
-                          style: const TextStyle(color: Colors.black87, fontSize: 18),
+                          style: const TextStyle(
+                              color: Colors.black87, fontSize: 18),
                         ),
                       ],
                     ),
@@ -117,7 +122,8 @@ class StudentDetailView extends StatelessWidget {
                         ),
                         TextSpan(
                           text: student.phone.toString(),
-                          style: const TextStyle(color: Colors.black87, fontSize: 18),
+                          style: const TextStyle(
+                              color: Colors.black87, fontSize: 18),
                         ),
                       ],
                     ),
@@ -135,7 +141,8 @@ class StudentDetailView extends StatelessWidget {
                         ),
                         TextSpan(
                           text: student.email,
-                          style: const TextStyle(color: Colors.black87, fontSize: 18),
+                          style: const TextStyle(
+                              color: Colors.black87, fontSize: 18),
                         ),
                       ],
                     ),

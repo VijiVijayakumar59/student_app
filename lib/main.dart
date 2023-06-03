@@ -11,7 +11,7 @@ void main() async {
   // Registers custom adapter named "StudentAdapter".
   Hive.registerAdapter(StudentAdapter());
   // Opens the box named "students".
-  await Hive.openBox<Student>('students');
+  await Hive.openBox<Student>('student_db');
   // Opens the box named "user".
   await Hive.openBox('user');
   runApp(const MyApp());

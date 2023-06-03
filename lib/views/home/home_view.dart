@@ -91,6 +91,7 @@ class _HomePageViewState extends State<HomePageView> {
                         MaterialPageRoute(
                           builder: (ctx) => StudentDetailView(
                             student: state.students[index],
+                            index: index,
                           ),
                         ),
                       );
